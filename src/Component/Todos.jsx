@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeTodo } from "../features/todo/todoSlice";
 
-const Todos = () => {
+const Todos = ({ onEdit }) => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
@@ -15,6 +15,12 @@ const Todos = () => {
             key={todo.id}
           >
             <div className="text-white">{todo.text}</div>
+            <button
+              className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
+              onClick={() => onEdit(todo)}
+            >
+              ✏️
+            </button>
             <button
               onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
